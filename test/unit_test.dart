@@ -20,7 +20,7 @@ void main() {
     });
 
     test('malformed URL is treated as external', () {
-      expect(UrlHelper.isExternal('not a url ::::', base), isFalse);
+      expect(UrlHelper.isExternal('not a url ::::', base), isTrue);
     });
   });
 
