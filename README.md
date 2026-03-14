@@ -1,378 +1,465 @@
-# Ideas2invest Mobile
+# Ideas2Invest Mobile
 
-**Ideas2invest** is a B2B SaaS platform that acts as an intermediary between
-businesses and investors on one side and freelancers, engineers, PhD students,
-and other innovators on the other. It empowers innovators to showcase their
-ideas safely — without risk of theft — through a secure, NDA-backed payment
-model and optional brevet/patent support.
+**Ideas2Invest Mobile** is the official cross-platform Flutter companion app for the **Ideas2Invest platform** — a B2B SaaS innovation marketplace that connects **innovators, engineers, researchers, freelancers, students, and entrepreneurs** with **investors, companies, and industrial actors looking for new technologies, processes, and business opportunities**.
 
-This repository contains the **cross-platform Flutter companion app** (iOS,
-Android, and Web) that wraps the Ideas2invest web platform in a native mobile
-shell with bottom-tab navigation, a drawer menu, and platform-native behaviours
-such as pull-to-refresh and back-button handling.
+The core idea behind the platform is simple:
 
-> 🏆 **Presented at JNITI 2026** — *Innovation as a Development Vector*
+> **Valuable ideas should not remain hidden because of fear of theft**
 
----
+Ideas2Invest allows innovators to publish ideas in a **controlled, monetizable, and legally framed environment**. Instead of forcing creators to reveal everything publicly, the platform enables a **two-layer disclosure model**:
 
-## Table of Contents
+- **Public teaser layer** for discovery
+- **Private premium layer** containing the full technical, economic, and strategic content
 
-1. [Platform Overview](#platform-overview)
-2. [Screenshots](#screenshots)
-3. [Project Structure](#project-structure)
-4. [Getting Started](#getting-started)
-5. [How It Works](#how-it-works)
-6. [JNITI 2026 Presentation Plan](#jniti-2026-presentation-plan)
-7. [Release Checklist](#release-checklist)
-8. [Dependencies](#dependencies)
-9. [License](#license)
+This repository contains the **Flutter mobile application** that serves as the native mobile shell for the Ideas2Invest web platform on **Android, iOS, and Web**.
+
+🏆 **Presented at JNITI 2026 — Innovation as a Development Vector**
 
 ---
 
-## Platform Overview
+# Table of Contents
 
-### Problem
+1. Project Overview  
+2. The Problem  
+3. The Solution  
+4. How the Platform Works  
+5. Use Case Example  
+6. Business Model  
+7. Security and Intellectual Property Logic  
+8. Mobile App Architecture  
+9. Key Features  
+10. Technical Stack  
+11. Project Structure  
+12. Installation  
+13. Configuration  
+14. Running the App  
+15. Building the APK  
+16. Testing  
+17. JNITI 2026 Demo Flow  
+18. Future Roadmap  
+19. Author  
+20. License  
 
-Innovators — whether freelancers, engineers, researchers, or entrepreneurs —
-often hesitate to share breakthrough ideas for fear of intellectual theft. At
-the same time, businesses and investors struggle to discover and evaluate early-
-stage innovation before committing resources.
+---
 
-### Solution
+# Project Overview
 
-Ideas2invest solves both sides of the equation:
+**Ideas2Invest** is a digital platform designed to transform **raw innovation into structured investment opportunity**.
 
-| Stakeholder | Benefit |
+It acts as an intermediary between two groups:
+
+| Stakeholder | Role |
 |---|---|
-| **Innovators** | Publish ideas with full confidentiality controls; monetise access to detailed specs |
-| **Businesses / Investors** | Pay to unlock detailed idea dossiers; NDA signed automatically at checkout |
-| **Platform** | Secure escrow of knowledge; optional national & international brevet filing support |
+| Innovators | Publish promising ideas, inventions, technical concepts, or business projects |
+| Investors / Companies | Discover, evaluate, unlock, and potentially fund or acquire these ideas |
 
-### Key Features
+The mobile app exists because innovation marketplaces must be **accessible everywhere**, not only from desktop environments.
 
-- 🔒 **Confidential idea publishing** — public teaser + gated full disclosure
-- 💳 **Pay-to-access with NDA coupling** — payment automatically triggers a
-  legally binding NDA between the buyer and the innovator
-- 📜 **Brevet / Patent assistance** *(under study)* — help innovators register
-  national and international patents to legitimise and protect their work
-- 🤝 **B2B matchmaking** — structured workflow for investor due-diligence and
-  business–innovator collaboration
-- 📱 **Mobile & Web** — fully responsive web platform plus this native mobile
-  app
+The Flutter application provides:
+
+- fast browsing of innovation opportunities
+- mobile access to the web platform
+- native-feeling navigation
+- integration with mobile device behaviors
+
+while the **web platform continues to host the core business logic**.
 
 ---
 
-## Screenshots
+# The Problem
 
-> ⚠️ **Screenshots not yet committed.** Save each image to
-> `docs/screenshots/<filename>` and the links below will resolve automatically.
-> Aim for at least one screenshot per section.
+## Innovators fear idea theft
 
-### Web Platform
+Many engineers, students, inventors, and researchers hesitate to share their ideas because revealing the full concept publicly can allow others to replicate or commercialize it.
 
-| Section | File to add |
-|---------|-------------|
-| Home / Landing page | `docs/screenshots/web_home.png` |
-| Ideas listing | `docs/screenshots/web_ideas.png` |
-| Idea detail — teaser view (free) | `docs/screenshots/web_idea_detail_teaser.png` |
-| Idea detail — unlocked (post NDA + payment) | `docs/screenshots/web_idea_detail_unlocked.png` |
-| NDA + Payment flow | `docs/screenshots/web_payment_nda.png` |
-| Posts / community feed | `docs/screenshots/web_posts.png` |
-| Authentication (Login / Register) | `docs/screenshots/web_auth.png` |
+## No structured marketplace for protected ideas
 
-<!-- Once the files above exist, uncomment and use these image tags:
-![Web – Home](docs/screenshots/web_home.png)
-![Web – Ideas](docs/screenshots/web_ideas.png)
-![Web – Idea Detail (Teaser)](docs/screenshots/web_idea_detail_teaser.png)
-![Web – Idea Detail (Unlocked)](docs/screenshots/web_idea_detail_unlocked.png)
-![Web – NDA & Payment](docs/screenshots/web_payment_nda.png)
-![Web – Posts Feed](docs/screenshots/web_posts.png)
-![Web – Auth](docs/screenshots/web_auth.png)
--->
+Platforms like:
 
----
+- LinkedIn  
+- GitHub  
+- ResearchGate  
+- crowdfunding platforms  
 
-### Mobile App (Flutter)
+allow people to share **content or startups**, but they do **not allow people to safely monetize raw ideas themselves**.
 
-| Section | File to add |
-|---------|-------------|
-| Home tab | `docs/screenshots/mobile_home.png` |
-| Ideas tab | `docs/screenshots/mobile_ideas.png` |
-| Posts tab | `docs/screenshots/mobile_posts.png` |
-| Login screen | `docs/screenshots/mobile_login.png` |
-| Navigation drawer | `docs/screenshots/mobile_drawer.png` |
-| Settings screen | `docs/screenshots/mobile_settings.png` |
+## Investors discover ideas too late
 
-<!-- Once the files above exist, uncomment and use these image tags:
-![Mobile – Home](docs/screenshots/mobile_home.png)
-![Mobile – Ideas](docs/screenshots/mobile_ideas.png)
-![Mobile – Posts](docs/screenshots/mobile_posts.png)
-![Mobile – Login](docs/screenshots/mobile_login.png)
-![Mobile – Drawer](docs/screenshots/mobile_drawer.png)
-![Mobile – Settings](docs/screenshots/mobile_settings.png)
--->
+Most investors only encounter ideas once they are already structured as startups, while the most valuable innovations often appear earlier as:
+
+- engineering concepts
+- industrial process ideas
+- scientific innovations
+- product ideas
+- feasibility studies
+
+Ideas2Invest aims to expose this **hidden innovation layer**.
 
 ---
 
-## Project Structure
+# The Solution
+
+Ideas2Invest introduces a **gated innovation marketplace**.
+
+Instead of exposing the entire idea publicly, disclosure is structured in **two stages**.
+
+## Public Teaser
+
+Visible to everyone:
+
+- title
+- short description
+- industry category
+- value proposition
+
+Example:
+
+```
+Cactus-based leather alternative
+```
+
+This allows discovery without revealing the entire method.
+
+## Premium Unlock
+
+After payment and agreement conditions, the investor gains access to:
+
+- full feasibility study
+- process engineering details
+- technical calculations
+- industrial implementation plan
+- project roadmap
+- economic assumptions
+
+This converts the idea from a **concept** into a **potential investment dossier**.
+
+---
+
+# How the Platform Works
+
+## Step 1 — Innovator submits an idea
+
+Innovators publish:
+
+- title
+- teaser description
+- domain or industry
+- unlock price
+
+Example:
+
+Title: Hydrogen Compression Heat Recovery System
+
+Teaser:
+A system that captures the thermal energy generated during hydrogen compression and reuses it to improve system efficiency.
+
+Unlock price: 150 USD
+
+---
+
+## Step 2 — Investor browses opportunities
+
+Investors explore ideas through:
+
+- innovation categories
+- trending projects
+- new publications
+- teaser descriptions
+
+At this stage, investors see **enough information to evaluate interest**, but **not enough to reproduce the concept**.
+
+---
+
+## Step 3 — Investor unlocks the idea
+
+If the investor is interested:
+
+1. the investor pays the unlock fee  
+2. platform records the access event  
+3. the full technical documentation becomes available  
+
+---
+
+## Step 4 — Collaboration begins
+
+Once unlocked, investors may:
+
+- contact the innovator
+- negotiate licensing
+- fund development
+- create a startup around the idea
+
+---
+
+# Use Case Example
+
+## Public View
+
+```
+Making leather from cactus
+```
+
+Visible information:
+
+- sustainability promise
+- possible fashion applications
+- material innovation concept
+
+## Premium View
+
+After unlocking:
+
+- raw material processing method
+- chemical treatment logic
+- plant process description
+- industrial equipment requirements
+- production calculations
+- estimated plant capacity
+- preliminary economic analysis
+
+---
+
+# Business Model
+
+Ideas2Invest monetizes innovation access through several mechanisms.
+
+## Idea unlock fees
+
+Investors pay to access full technical documentation.
+
+Example:
+
+Idea unlock price: $150  
+Platform fee: 10-20%
+
+## Patent / Brevet assistance
+
+Future services may include assistance with:
+
+- Moroccan brevet filing
+- innovation documentation
+- patent preparation workflows
+
+## Premium investor tools
+
+Potential premium features:
+
+- advanced idea discovery
+- investor dashboards
+- innovation analytics
+- early access to new ideas
+
+---
+
+# Security and Intellectual Property Logic
+
+The platform uses **controlled disclosure**.
+
+Key mechanisms:
+
+- teaser-only public information
+- paid access to full content
+- access logging
+- potential NDA workflow
+- optional patent protection path
+
+The goal is not absolute secrecy, but **structured and intentional disclosure**.
+
+---
+
+# Mobile App Architecture
+
+The Flutter mobile app follows a **hybrid architecture**.
+
+```
+Flutter Mobile App
+        │
+        │ WebView
+        ▼
+Ideas2Invest Web Platform
+        │
+        ▼
+Backend API + Database
+```
+
+This allows:
+
+- fast mobile deployment
+- reuse of the web platform
+- consistent platform logic
+- native navigation experience
+
+---
+
+# Key Features
+
+- Cross-platform Flutter application
+- Mobile WebView integration
+- Bottom navigation tabs
+- Drawer navigation menu
+- Pull-to-refresh support
+- External link detection
+- Environment-based backend configuration
+- Material 3 UI
+
+---
+
+# Technical Stack
+
+Core technologies:
+
+- Flutter
+- Dart
+
+Main packages:
+
+| Package | Purpose |
+|---|---|
+| webview_flutter | Render the web platform inside the app |
+| flutter_dotenv | Load backend configuration |
+| url_launcher | Open external links |
+| flutter_spinkit | Loading animations |
+
+---
+
+# Project Structure
 
 ```
 .
-├── .env.example                        # Environment template
-├── analysis_options.yaml               # Dart lint rules
-├── pubspec.yaml                        # Flutter dependencies
+├── .env.example
+├── analysis_options.yaml
+├── pubspec.yaml
 ├── assets/
 │   └── icons/
-│       └── app_icon.png                # App icon (replace before release)
+│       └── app_icon.png
 ├── android/
-│   └── app/src/main/
-│       └── AndroidManifest.xml         # INTERNET permission included
 ├── ios/
-│   └── Runner/
-│       └── Info.plist                  # ATS configured (HTTPS only)
 ├── lib/
-│   ├── main.dart                       # Entry point – loads .env, runs app
-│   ├── app.dart                        # MaterialApp with Material 3 theme
+│   ├── main.dart
+│   ├── app.dart
 │   ├── config/
-│   │   └── env.dart                    # Reads BACKEND_BASE_URL, normalises trailing slash
 │   ├── theme/
-│   │   └── theme.dart                  # App-wide Material 3 theme (blue #1565C0)
 │   ├── navigation/
-│   │   └── tab_item.dart               # Tab definitions (label, icon, path)
 │   ├── screens/
-│   │   ├── shell_screen.dart           # Main shell: tabs + drawer + back-button logic
-│   │   ├── settings_screen.dart        # Native Settings page
-│   │   └── about_screen.dart           # Native About page
 │   └── web/
-│       ├── webview_screen.dart         # Mobile WebView with pull-to-refresh & spinner
-│       ├── web_iframe_screen.dart      # Web-platform iframe (dart:html, web-only)
-│       ├── web_iframe_screen_stub.dart # Stub for non-web platforms
-│       ├── web_iframe_screen_export.dart # Conditional export (web vs. mobile)
-│       └── url_helper.dart             # External-link detection helper
 └── test/
-    └── unit_test.dart                  # Unit tests for URL helpers and tab definitions
 ```
 
 ---
 
-## Getting Started
+# Installation
 
-### Prerequisites
+Clone the repository:
 
-| Tool    | Minimum version |
-|---------|-----------------|
-| Flutter | 3.x stable      |
-| Dart    | ≥ 3.0.0         |
+```
+git clone https://github.com/TahaBo04/Ideas2Invest-mobile.git
+cd Ideas2Invest-mobile
+```
 
-### 1. Clone & install
+Install dependencies:
 
-```bash
-git clone <repo-url>
-cd Ideas2invest-mobile
+```
 flutter pub get
 ```
 
-### 2. Configure the environment
+---
 
-```bash
+# Configuration
+
+Copy the environment template:
+
+```
 cp .env.example .env
 ```
 
-Edit `.env` and set your backend URL:
+Edit `.env`:
 
 ```
-BACKEND_BASE_URL=https://your-site.com/
+BACKEND_BASE_URL=https://ideas2invest-self.vercel.app/
 ```
 
-> **Tip:** Always include a trailing slash. The app normalises it at runtime,
-> but keeping it explicit avoids confusion.
+---
 
-### 3. Run
+# Running the App
 
-```bash
-# Android
+Run locally:
+
+```
 flutter run
+```
 
-# iOS (macOS only)
-flutter run --device-id <ios-simulator-id>
+Run in Chrome:
 
-# Web
+```
 flutter run -d chrome
 ```
 
 ---
 
-## How It Works
+# Building the APK
 
-### Navigation
-
-The app provides five bottom-navigation tabs, each loading a corresponding
-section of the backend:
-
-| Tab          | Icon               | Backend Path      |
-|--------------|--------------------|-------------------|
-| Home         | `home`             | `/`               |
-| Ideas        | `lightbulb`        | `/ideas/`         |
-| Posts        | `article`          | `/posts/`         |
-| Login        | `login`            | `/auth/login`     |
-| Register     | `person_add`       | `/auth/register`  |
-
-A **drawer menu** provides additional access to:
-
-- **Settings** – native Flutter settings page (dark mode toggle, cache clear).
-- **About** – native Flutter about page (version, copyright).
-
-### External Links
-
-Any link whose host differs from `BACKEND_BASE_URL` is opened in the system
-browser via `url_launcher`, keeping the user inside the app for all internal
-navigation.
-
-### Back Button
-
-On Android, pressing the hardware back button:
-
-1. If the current WebView can go back → navigates back within the WebView.
-2. Otherwise → exits the app (default system behaviour).
-
-### Pull-to-Refresh
-
-Each WebView tab supports pull-to-refresh, which reloads the current page.
-
-### Loading Indicator
-
-A `SpinKitFadingCircle` spinner is shown while any WebView page is loading.
-
-### Web Platform Support
-
-On Flutter Web the app renders the backend inside an HTML `<iframe>` (via
-`dart:html`) rather than a WebView widget, providing full browser-native
-behaviour.
-
----
-
-## JNITI 2026 Presentation Plan
-
-> This section outlines the recommended structure for a project demo / report
-> to be presented at the **JNITI 2026** hackathon (*Innovation as a Development
-> Vector*).
-
-### Recommended Presentation Structure
+Generate Android APK:
 
 ```
-1. Cover Slide
-   ├─ Project name & logo
-   ├─ Team name / members
-   └─ Hackathon: JNITI 2026 — Innovation as a Development Vector
-
-2. Problem Statement (2 min)
-   ├─ Innovators fear idea theft → ideas stay locked in drawers
-   ├─ Investors/businesses lack structured access to early-stage ideas
-   └─ Existing platforms offer no legal protection at point of disclosure
-
-3. Our Solution — Ideas2invest (3 min)
-   ├─ B2B SaaS intermediary platform
-   ├─ Public teaser + gated full disclosure model
-   ├─ Pay-to-access + automatic NDA coupling
-   └─ Optional brevet/patent filing support
-
-4. Live Demo — Web Platform (5 min)
-   ├─ [SCREENSHOT: web_home.png]           Landing page & value proposition
-   ├─ [SCREENSHOT: web_ideas.png]          Browse published ideas
-   ├─ [SCREENSHOT: web_idea_detail_teaser.png]  Teaser view (free)
-   ├─ [SCREENSHOT: web_payment_nda.png]    Payment + NDA signing flow
-   ├─ [SCREENSHOT: web_idea_detail_unlocked.png] Unlocked full disclosure
-   └─ [SCREENSHOT: web_posts.png]          Community posts & discussion feed
-
-5. Live Demo — Mobile App (3 min)
-   ├─ [SCREENSHOT: mobile_home.png]        Home tab
-   ├─ [SCREENSHOT: mobile_ideas.png]       Ideas tab (browse + access)
-   ├─ [SCREENSHOT: mobile_posts.png]       Posts / feed tab
-   ├─ [SCREENSHOT: mobile_login.png]       Authentication
-   └─ [SCREENSHOT: mobile_drawer.png]      Navigation drawer
-
-6. Technical Architecture (2 min)
-   ├─ Backend: [your stack] serving REST API + web frontend
-   ├─ Mobile: Flutter (iOS / Android / Web) — native wrapper
-   ├─ Security: HTTPS-only (ATS + HSTS), NDA stored server-side
-   └─ Payments: [payment provider] → triggers NDA generation
-
-7. Business Model (2 min)
-   ├─ Revenue streams: platform fee on each unlocked idea
-   ├─ Premium tier: brevet/patent filing assistance
-   └─ Future: escrow + milestone-based investment releases
-
-8. Roadmap (1 min)
-   ├─ v1.0 (current): idea publishing + pay-to-access + NDA
-   ├─ v1.1 (planned): national brevet filing integration
-   └─ v1.2 (planned): international PCT patent support
-
-9. Q&A
+flutter build apk --release
 ```
 
-### Demo Checklist
+Output:
 
-Before the presentation, verify:
-
-- [ ] Backend is live and accessible at `BACKEND_BASE_URL`
-- [ ] At least 3 sample ideas are published (1 free teaser, 2 fully locked)
-- [ ] Payment + NDA flow has been tested end-to-end
-- [ ] Flutter app is installed on a physical Android device for demo
-- [ ] Screenshots in `docs/screenshots/` are up to date
-- [ ] Slide deck references the latest screenshots
+```
+build/app/outputs/flutter-apk/app-release.apk
+```
 
 ---
 
-## Release Checklist
+# Testing
 
-### Android (Google Play Store)
+Run tests:
 
-1. **Bundle ID** – update `applicationId` in `android/app/build.gradle`
-   (e.g. `com.ideas2invest.mobile`).
-2. **App Icon** – replace `assets/icons/app_icon.png` with your production
-   icon and run
-   [flutter_launcher_icons](https://pub.dev/packages/flutter_launcher_icons)
-   to generate all densities.
-3. **Signing** – create a keystore and configure `android/key.properties`:
-   ```properties
-   storePassword=<password>
-   keyPassword=<password>
-   keyAlias=upload
-   storeFile=<path-to-keystore>
-   ```
-4. **Build AAB**:
-   ```bash
-   flutter build appbundle --release
-   ```
-5. Upload `build/app/outputs/bundle/release/app-release.aab` to Google Play
-   Console.
-
-### iOS (Apple App Store)
-
-1. **Bundle ID** – update `PRODUCT_BUNDLE_IDENTIFIER` in Xcode → Runner →
-   General (e.g. `com.ideas2invest.mobile`).
-2. **App Icon** – provide a 1024×1024 icon in `ios/Runner/Assets.xcassets`.
-3. **Signing** – configure automatic signing with your Apple Developer account
-   in Xcode.
-4. **Build IPA**:
-   ```bash
-   flutter build ipa --release
-   ```
-5. Upload via Xcode Organizer or `xcrun altool` to App Store Connect.
+```
+flutter test
+```
 
 ---
 
-## Dependencies
+# JNITI 2026 Demo Flow
 
-| Package            | Purpose                                      |
-|--------------------|----------------------------------------------|
-| `webview_flutter`  | In-app WebView (mobile)                      |
-| `url_launcher`     | Open external links in system browser        |
-| `flutter_dotenv`   | Load `.env` configuration at runtime         |
-| `flutter_spinkit`  | Animated loading spinner                     |
+Demo sequence:
+
+1. Present the innovation marketplace concept  
+2. Browse teaser ideas  
+3. Show unlock mechanism  
+4. Display full technical documentation  
+5. Demonstrate the mobile application  
 
 ---
 
-## License
+# Future Roadmap
 
-This project is private. See the repository owner for licensing details.
+Phase 1  
+Core platform and mobile access
+
+Phase 2  
+NDA integration and improved access control
+
+Phase 3  
+Patent / brevet assistance workflow
+
+Phase 4  
+Investor dashboards and project funding tools
+
+---
+
+# Author
+
+**Boulaamane Taha**  
+EMI Process
+École Mohammadia d’Ingénieurs  
+
+Founder of the **Ideas2Invest concept**
+
+---
+
+# License
+
+This project is currently private and under active development.
